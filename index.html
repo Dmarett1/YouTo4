@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>YouTube to MP3</title>
+  <style>
+    body {
+      background: #111;
+      color: #fff;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+    .container {
+      background: #222;
+      padding: 2rem;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 500px;
+    }
+    input[type="url"] {
+      width: 100%;
+      padding: 0.8em;
+      border-radius: 5px;
+      border: none;
+      margin-bottom: 1rem;
+    }
+    button {
+      width: 100%;
+      padding: 0.8em;
+      background: #f00;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .status {
+      margin-top: 1rem;
+      text-align: center;
+    }
+    a.download-link {
+      color: #0f0;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>YouTube to MP3</h1>
+    <input type="url" id="youtubeUrl" placeholder="Enter YouTube URL" />
+    <button onclick="convert()">Convert to MP3</button>
+    <div class="status" id="status"></div>
+  </div>
+
+  <script>
+    async function convert() {
+      const url = document.getElementById("youtubeUrl").value;
+      const status = document.getElementById("status");
+      status.innerHTML = "Processing...";
+
+      const res = await fetch("/convert", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url })
+      });
+
+      const data = await res.json();
+      if (data.error) {
+        status.innerHTML = `<span style="color:red;">Error: ${data.error}</span>`;
+      } else {
+        status.innerHTML = `✅ MP3 Ready: <a class="download-link" href="${data.downloadUrl}" target="_blank">Download</a>`;
+      }
+    }
+  </script>
+</body>
+</html>
