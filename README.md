@@ -103,11 +103,11 @@ C:\ffmpeg\bin
 
 <h2>How to Run:</h2>
 
-  1. Download a zip of youtube-to-mp3 and extract it.
+  1. Download a zip of YouTo4 and extract it.
 
-  2. Create an empty folder named "downloads" in \youtube-to-mp3-main (This is where your mp3's will be saved to).
+  2. Create an empty folder named "downloads" in \YouTo4-main (This is where your mp3's will be saved to).
 
-  3. Open your command prompt or terminal and cd into \youtube-to-mp3-main:
+  3. Open your command prompt or terminal and cd into \YouTo4-main:
 
   4. Then enter:
   
