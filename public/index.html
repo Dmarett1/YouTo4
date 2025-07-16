@@ -3,78 +3,244 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>YouTube to MP3</title>
+  <title>YouTube to MP3/MP4</title>
   <style>
+    :root {
+      --red-light: #e63946;
+      --red-dark: #b22222;
+      --gray-light: #f0f0f0;
+      --gray-dark: #222;
+      --transition-time: 0.3s;
+    }
+
     body {
-      background: #111;
-      color: #fff;
-      font-family: sans-serif;
+      background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+      color: #eee;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 2rem;
+      padding: 3rem 1rem 2rem;
+      min-height: 100vh;
+      transition: background var(--transition-time), color var(--transition-time);
     }
+
+    body.light {
+      background: linear-gradient(135deg, #fff, #ccc);
+      color: #660000;
+    }
+
     .container {
-      background: #222;
+      background: #2b2b2b;
       padding: 2rem;
-      border-radius: 10px;
+      border-radius: 12px;
       width: 100%;
-      max-width: 500px;
+      max-width: 480px;
+      box-shadow: 0 0 12px rgba(230, 57, 70, 0.7);
+      transition: background var(--transition-time), color var(--transition-time);
     }
+
+    body.light .container {
+      background: #fff0f0;
+      box-shadow: 0 0 12px rgba(198, 35, 46, 0.6);
+    }
+
     input[type="url"] {
       width: 100%;
       padding: 0.8em;
-      border-radius: 5px;
-      border: none;
+      border-radius: 6px;
+      border: 2px solid var(--red-light);
       margin-bottom: 1rem;
+      font-size: 1rem;
+      transition: border-color var(--transition-time);
     }
+
+    input[type="url"]:focus {
+      outline: none;
+      border-color: var(--red-dark);
+    }
+
     button {
       width: 100%;
-      padding: 0.8em;
-      background: #f00;
+      padding: 0.85em;
+      background: var(--red-light);
       color: white;
-      font-weight: bold;
+      font-weight: 700;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
       cursor: pointer;
+      font-size: 1rem;
+      transition: background-color var(--transition-time), transform 0.2s;
+      margin-bottom: 0.8rem;
+      user-select: none;
     }
+
+    button:hover {
+      background: var(--red-dark);
+      transform: scale(1.05);
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    button#mp4Btn {
+      background: #28a745; /* Green */
+      margin-bottom: 0;
+      transition: background-color var(--transition-time), transform 0.2s;
+    }
+
+    button#mp4Btn:hover {
+      background: #1e7e34;
+    }
+
     .status {
-      margin-top: 1rem;
+      margin-top: 1.5rem;
+      text-align: center;
+      font-size: 1.1rem;
+      min-height: 2em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    a.download-link {
+      color: var(--red-light);
+      font-weight: 700;
+      text-decoration: none;
+      transition: color var(--transition-time);
+    }
+
+    a.download-link:hover {
+      color: var(--red-dark);
+      text-decoration: underline;
+    }
+
+    /* Loading spinner */
+    .loader {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid var(--red-light);
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
+    }
+
+    /* Dark/light toggle button in top right corner */
+    #themeToggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: transparent;
+      border: 2px solid var(--red-light);
+      color: var(--red-light);
+      padding: 0.3rem 0.6rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.85rem;
+      user-select: none;
+      transition: background-color var(--transition-time), color var(--transition-time), border-color var(--transition-time);
+      z-index: 1000;
+      width: auto;
+      min-width: 50px;
       text-align: center;
     }
-    a.download-link {
-      color: #0f0;
-      font-weight: bold;
+
+    #themeToggle:hover {
+      background: var(--red-light);
+      color: white;
+      border-color: var(--red-dark);
     }
   </style>
 </head>
 <body>
+  <button id="themeToggle" aria-label="Toggle Dark/Light Mode">Light</button>
+
   <div class="container">
-    <h1>YouTube to MP3</h1>
+    <h1>YouTube to MP3 / MP4</h1>
     <input type="url" id="youtubeUrl" placeholder="Enter YouTube URL" />
-    <button onclick="convert()">Convert to MP3</button>
+    <button onclick="convert('mp3')">Convert to MP3</button>
+    <button id="mp4Btn" onclick="convert('mp4')">Convert to MP4</button>
+
     <div class="status" id="status"></div>
   </div>
 
   <script>
-    async function convert() {
-      const url = document.getElementById("youtubeUrl").value;
-      const status = document.getElementById("status");
-      status.innerHTML = "Processing...";
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
 
-      const res = await fetch("/convert", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url })
-      });
+    // Default to dark mode
+    if (!localStorage.getItem('theme')) {
+      localStorage.setItem('theme', 'dark');
+    }
 
-      const data = await res.json();
-      if (data.error) {
-        status.innerHTML = `<span style="color:red;">Error: ${data.error}</span>`;
+    function updateTheme() {
+      const theme = localStorage.getItem('theme');
+      if (theme === 'light') {
+        body.classList.add('light');
+        themeToggle.textContent = 'Dark';
       } else {
-        status.innerHTML = `✅ MP3 Ready: <a class="download-link" href="${data.downloadUrl}" target="_blank">Download</a>`;
+        body.classList.remove('light');
+        themeToggle.textContent = 'Light';
       }
     }
+
+    themeToggle.onclick = () => {
+      const current = localStorage.getItem('theme');
+      localStorage.setItem('theme', current === 'dark' ? 'light' : 'dark');
+      updateTheme();
+    };
+
+    updateTheme();
+
+    async function convert(type) {
+  const url = document.getElementById("youtubeUrl").value.trim();
+  const status = document.getElementById("status");
+
+  if (!url) {
+    status.innerHTML = `<span style="color: #b22222;">Please enter a valid YouTube URL</span>`;
+    return;
+  }
+
+  status.innerHTML = `<div class="loader"></div> Processing...`;
+
+  try {
+    const res = await fetch(type === 'mp4' ? '/convert-mp4' : '/convert', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url })
+    });
+
+    if (!res.ok) {
+      const errText = await res.text();
+      status.innerHTML = `<span style="color: #b22222;">Error: ${errText || 'Failed to convert.'}</span>`;
+      return;
+    }
+
+    const data = await res.json();  // Parse JSON instead of blob
+    const downloadUrl = data.downloadUrl;
+
+    const a = document.createElement('a');
+    a.href = downloadUrl;
+    a.download = type === 'mp4' ? 'video.mp4' : 'audio.mp3';
+    a.textContent = 'Download';
+    a.className = 'download-link';
+
+    status.innerHTML = `✅ ${type.toUpperCase()} Ready: `;
+    status.appendChild(a);
+  } catch(e) {
+    status.innerHTML = `<span style="color: #b22222;">Error: ${e.message}</span>`;
+  }
+}
   </script>
 </body>
 </html>
+
