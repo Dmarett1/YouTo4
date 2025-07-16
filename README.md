@@ -15,22 +15,15 @@ Make sure you have installed:
 <h2>- yt-dlp</h2>
 
   <h4>For brew:</h4>
+  (I have no clue if it works with brew but I expect it to)
 
   <pre>
     <code>
       brew install yt-dlp
     </code>
   </pre>
-  
-  <h4>For Pip:</h4>
 
-  <pre>
-    <code>
-      pip install -U yt-dlp
-    </code>
-  </pre>
-
-  <h4>Standalone download:</h4>
+<h4>Standalone download:</h4>
   1. Go to the <a href="https://github.com/yt-dlp/yt-dlp/releases/tag/2025.06.30">yt-dlp GitHub Releases page</a>.
 
   2. Download: yt-dlp.exe
