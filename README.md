@@ -1,6 +1,6 @@
-<h1>YOUTUBE-TO-MP3</h1>
+<h1>YouTo4/</h1>
 
-<h3>youtube-to-mp3 is an open-source converter for YouTube videos into mp3 files
+<h3>YouTo4 is an open-source YouTube mp4/mp3 converter 
 It is built using html so you will have to run it in your browser but it requires very little setup.</h3>
 I will be adding an mp4 addition to this soon enough. I just needed to download youtube video mp3 for music samples and I hated how all other websites took too long or displayed stupid ads, so I made my own. This is my first time doing a public repository on GitHub and my first time doing instructions so sorry if they suck. 
 I'm also not sure if the mac/brew instructions work please someone let me know if they don't (As im already guessing they don't)
@@ -127,4 +127,4 @@ node server.js
 
   Then open <a href="http://localhost:3000">http://localhost:3000</a> in your browser.
 
-<h2>I will be working on updating the code to add things like a mp4 converter and overall just better UI</h2>
+<h2>Updates coming soon.</h2>
