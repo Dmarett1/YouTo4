@@ -13,9 +13,7 @@ Node.js (v16+ recommended)
 yt-dlp (you can install it via pip)
 
 <h4>For Pip:</h4>
-'''
-pip install -U yt-dlp
-'''
+'''pip install -U yt-dlp'''
 
 <h4>Standalone download:</h4>
 1. Go to the [yt-dlp GitHub Releases page.](https://github.com/yt-dlp/yt-dlp/releases/tag/2025.06.30)
