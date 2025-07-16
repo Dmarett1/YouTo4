@@ -20,7 +20,7 @@ Make sure you have installed:
 
   <pre>
     <code>
-      brew install yt-dlp
+brew install yt-dlp
     </code>
   </pre>
 
@@ -32,7 +32,7 @@ Make sure you have installed:
   3. Move it to a permanent folder like:
   <pre>
   <code>
-      C:\yt-dlp\
+C:\yt-dlp\
   </code>
   </pre>
 
@@ -43,7 +43,7 @@ Make sure you have installed:
   Under System variables, find Path, click Edit, then New, and add:
   <pre>
   <code>
-      C:\yt-dlp\ (or whatever you named your file)
+C:\yt-dlp\ (or whatever you named your file)
   </code>
   </pre>
 
@@ -51,7 +51,7 @@ Make sure you have installed:
 
   <pre>
     <code>
-      yt-dlp --version
+yt-dlp --version
     </code>
   </pre>
   If it shows a version number, you can move on.
@@ -63,7 +63,7 @@ Make sure you have installed:
 
   <pre>
     <code>
-       brew install ffmpeg
+brew install ffmpeg
     </code>
   </pre>
 
@@ -74,14 +74,14 @@ Make sure you have installed:
   2. Under “Release builds”, download:
      <pre>
        <code>
-         ffmpeg-release-full.7z (or ZIP)
+ffmpeg-release-full.7z (or ZIP)
        </code>
      </pre>
 
   3. Create and then extract your zip to a permanent folder like:
   <pre>
   <code>
-        C:\ffmpeg\
+C:\ffmpeg\
   </code>
   </pre>
 
@@ -95,7 +95,7 @@ Make sure you have installed:
 
      <pre>
        <code>
-          C:\ffmpeg\bin
+C:\ffmpeg\bin
        </code>
      </pre>
 
@@ -113,7 +113,7 @@ Make sure you have installed:
   
   <pre>
     <code>
-        npm install
+npm install
     </code>
   </pre>
 
@@ -121,10 +121,10 @@ Make sure you have installed:
   
   <pre>
     <code>
-        node server.js
+node server.js
     </code>
   </pre>
 
   Then open <a href="http://localhost:3000">http://localhost:3000</a> in your browser.
 
-<h2>And thats it..</h2>
+<h2>I will be working on updating the code to add things like a mp4 converter and overall just better UI</h2>
