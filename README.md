@@ -2,7 +2,7 @@
 
 <h3>youtube-to-mp3 is an open-source converter for YouTube videos into mp3 files
 It is built using html so you will have to run it in your browser but it requires very little setup!</h3>
-I will be adding an mp4 addition to this soon enough. I just needed to download youtube video mp3 for music samples and I hated how all other websites took too long or displayed stupid ads, so I made my own.
+I will be adding an mp4 addition to this soon enough. I just needed to download youtube video mp3 for music samples and I hated how all other websites took too long or displayed stupid ads, so I made my own. This is my first time doing a public repository on GitHub and my first time doing instructions so sorry if they suck. 
 
 <h2>How to run:</h2>
 
