@@ -2,6 +2,7 @@
 
 <h3>youtube-to-mp3 is an open-source converter for YouTube videos into mp3 files
 It is built using html so you will have to run it in your browser but it requires very little setup!</h3>
+I will be adding an mp4 addition to this soon enough. I just needed to download youtube video mp3 for music samples and I hated how all other websites took too long or displayed stupid ads, so I made my own.
 
 <h2>How to run:</h2>
 
@@ -108,12 +109,28 @@ Make sure you have installed:
 
 <h2>How to Run:</h2>
 
-  1. Download a zip of youtube-to-mp3 
+  1. Download a zip of youtube-to-mp3
 
-  2. Open your command prompt or terminal and enter:
+  2. Create an empty folder named "downloads" in \youtube-to-mp3-main (This is where your videos will be saved to).
+
+  3. Open your command prompt or terminal and cd into \youtube-to-mp3-main:
+
+  4. Then enter:
   
   <pre>
     <code>
-        
+        npm install
     </code>
   </pre>
+
+   4. Finally run:
+  
+  <pre>
+    <code>
+        node server.js
+    </code>
+  </pre>
+
+  Then open <a href="http://localhost:3000">http://localhost:3000</a> in your browser.
+
+<h2>And thats it..</h2>
