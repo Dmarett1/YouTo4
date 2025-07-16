@@ -1,4 +1,4 @@
-<h1>YouTo4/</h1>
+<h1>YouTo4</h1>
 
 <h3>YouTo4 is an open-source YouTube mp4/mp3 converter 
 It is built using html so you will have to run it in your browser but it requires very little setup.</h3>
