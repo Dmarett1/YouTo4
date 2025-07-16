@@ -103,7 +103,7 @@ Make sure you have installed:
 
 <h2>How to Run:</h2>
 
-  1. Download a zip of youtube-to-mp3
+  1. Download a zip of youtube-to-mp3 and extract.
 
   2. Create an empty folder named "downloads" in \youtube-to-mp3-main (This is where your videos will be saved to).
 
